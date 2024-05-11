@@ -1,23 +1,23 @@
 {
   "name": "codexdesign",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Component generator - from code to Figma designs.",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
-    "watch": "npm run build -- --watch"
+    "watch": "webpack --watch"
   },
-  "author": "",
-  "license": "",
+  "author": "Sara Tapusoa",
+  "license": "MIT",
   "devDependencies": {
-    "@figma/eslint-plugin-figma-plugins": "*",
-    "@figma/plugin-typings": "*",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint": "^8.54.0",
-    "typescript": "^5.3.2"
+    "@figma/eslint-plugin-figma-plugins": "^0.15.0",
+    "@figma/plugin-typings": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +42,7 @@
     }
   },
   "dependencies": {
+    "@octokit/rest": "^20.1.1",
     "ts-loader": "^9.5.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
