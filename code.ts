@@ -1,34 +1,41 @@
-// This plugin will open a window to prompt the user to enter a number, and
-// it will then create that many rectangles on the screen.
+const width = 300;
+const height = 200;
 
-// This file holds the main code for plugins. Code in this file has access to
-// the *figma document* via the figma global object.
-// You can access browser APIs in the <script> tag inside "ui.html" which has a
-// full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
+figma.showUI(__html__, { width, height });
 
-// This shows the HTML page in "ui.html".
-figma.showUI(__html__);
+figma.loadFontAsync({ family: "Roboto", style: "Bold" });
 
-// Calls to "parent.postMessage" from within the HTML page will trigger this
-// callback. The callback will be passed the "pluginMessage" property of the
-// posted message.
-figma.ui.onmessage =  (msg: {type: string, count: number}) => {
-  // One way of distinguishing between different types of messages sent from
-  // your HTML page is to use an object with a "type" property like this.
-  if (msg.type === 'create-rectangles') {
+figma.ui.onmessage =  (msg: {type: string, componentType?: string }) => {
+
+  if (msg.type === 'create') {
     const nodes: SceneNode[] = [];
-    for (let i = 0; i < msg.count; i++) {
-      const rect = figma.createRectangle();
-      rect.x = i * 150;
-      rect.fills = [{type: 'SOLID', color: {r: 1, g: 0.5, b: 0}}];
-      figma.currentPage.appendChild(rect);
-      nodes.push(rect);
-    }
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
+    let newNode: SceneNode | null = null;
+
+    switch (msg.componentType) {
+      case 'rectangle':
+          newNode = figma.createRectangle();
+          newNode.resize(150, 100); // Example size
+          newNode.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.75, b: 0.5 } }];
+          break;
+      case 'circle':
+          newNode = figma.createEllipse();
+          newNode.resize(100, 100); // Uniform width and height for a circle
+          newNode.fills = [{ type: 'SOLID', color: { r: 0.25, g: 0.25, b: 0.75 } }];
+          break;
+      case 'text':
+          newNode = figma.createText();
+          newNode.characters = "Hello, Figma!";
+          newNode.fontSize = 24;
+          break;
   }
 
-  // Make sure to close the plugin when you're done. Otherwise the plugin will
-  // keep running, which shows the cancel button at the bottom of the screen.
+  if (newNode !== null) {
+      figma.currentPage.appendChild(newNode);
+      nodes.push(newNode);
+      figma.currentPage.selection = nodes;
+      figma.viewport.scrollAndZoomIntoView(nodes);
+  }
+} else if (msg.type === 'cancel') {
   figma.closePlugin();
+}
 };
