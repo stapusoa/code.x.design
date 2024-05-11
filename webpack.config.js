@@ -2,7 +2,7 @@ module.exports = {
 	entry: './src/code.js',
 	mode: "production",
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: __dirname,
 		filename: "code.js",
 	},
 	resolve: {
