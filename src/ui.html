@@ -1,13 +1,39 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
+<style>
+  body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 8px;
+  }
+  button, select {
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px;
+  }
+  .green {
+    color: #13AE5C;
+  }
+  .grey100 {
+    color: #FEFEFE;
+  }
+</style>
+
+<h2>Component Generator</h2>
+<select id="component-dropdown">
+  <option value="rectangle">Rectangle</option>
+  <option value="circle">Circle</option>
+  <option value="text">Text</option>
+</select>
+
 <button id="create">Create</button>
 <button id="cancel">Cancel</button>
 <script>
 
 document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+
+  const componentType = document.getElementById('component-dropdown').value;
+  const create = document.getElementById('create');
+  parent.postMessage({ pluginMessage: { type: 'create', componentType: componentType } }, '*')
+
 }
 
 document.getElementById('cancel').onclick = () => {
