@@ -1,7 +1,7 @@
 {
   "name": "codexdesign",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Component generator - from code to Figma designs.",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -9,8 +9,8 @@
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
     "watch": "webpack --watch"
   },
-  "author": "",
-  "license": "",
+  "author": "Sara Tapusoa",
+  "license": "MIT",
   "devDependencies": {
     "@figma/eslint-plugin-figma-plugins": "^0.15.0",
     "@figma/plugin-typings": "^1.93.0",
