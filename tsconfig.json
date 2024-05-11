@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
+    "module": "es6",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/*"]
+    },
     "target": "es6",
-    "lib": ["es6"],
+    "lib": ["es6", "dom"],
+    "esModuleInterop": true,
     "strict": true,
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@figma"
     ]
-  }
+  },
+  "include": [
+    "src/**/*",
+    "code.ts",
+    "uno.config.ts"
+  ]
 }

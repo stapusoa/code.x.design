@@ -1,6 +1,7 @@
 import type { Theme } from '@unocss/preset-mini'
 import { defineConfig, presetUno } from 'unocss'
-import { unoShortcuts, unoTheme } from './src'
+import { unoShortcuts } from './src/unoShortcuts'
+import { unoTheme } from './src/unoTheme'
 
 export default defineConfig({
   content: {
