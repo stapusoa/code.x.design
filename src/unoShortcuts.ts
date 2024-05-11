@@ -67,7 +67,4 @@ export const unoShortcuts = {
   'type-small-text': 'type-small-text-mobile lg:type-small-text-desktop',
   'type-subtext':
     'm-0 color-forest font-roboto font-400 tracking-0 text-2.5 leading-3',
-  'shadow-1': 'shadow-[0px_1px_3px_rgba(0,0,0,0.1)]',
-  'shadow-2': 'shadow-[0px_3px_12px_rgba(0,0,0,0.08)]',
-  'shadow-3': 'shadow-[0px_10px_20px_rgba(0,0,0,0.1)]',
 } as const
