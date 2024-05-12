@@ -1,13 +1,22 @@
-import { colors as themeColors } from './colors'
-
-const colors = { ...themeColors }
-
 export const unoTheme = {
-  colors,
+  colors: {
+    green: '#13AE5C',
+    charcoal: '#2C2C2C',
+    stone: {
+      50: '#fafaf9',
+      200: '#e7e5e4',
+    },
+    neutral: {
+      400: '#a3a3a3',
+    },
+    zinc: {
+      300: '#d4d4d8',
+    },
+  },
   fontFamily: {
-    archivo: 'Archivo Narrow',
-    roboto: 'Roboto',
-    inter: 'Inter',
+    archivo: '"Archivo Narrow", sans-serif',
+    roboto: '"Roboto", sans-serif',
+    inter: '"Inter", sans-serif',
   },
   boxShadow: {
     sm: '0 1px 3px rgba(0, 0, 0, 0.1)',

@@ -18,6 +18,7 @@
   "include": [
     "src/**/*",
     "code.ts",
-    "uno.config.ts"
+    "uno.config.ts",
+    "dist/styles.css",
   ]
 }

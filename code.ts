@@ -1,7 +1,8 @@
+
 const width = 450;
 const height = 600;
 
-figma.showUI(__html__, { width, height });
+figma.showUI(__html__, { themeColors: true, width, height });
 
 figma.ui.onmessage = async (msg: {type: string, componentType?: string }) => {
 

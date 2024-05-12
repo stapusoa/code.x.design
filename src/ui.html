@@ -1,14 +1,6 @@
 <link rel="stylesheet" href="../dist/styles.css">
 
-<style>
-
-  body {
-    background-color: #2C2C2C;
-  }
-  
-</style>
-
-<div class="bg-charcoal">
+<div class="bg-charcoal w-full">
   <nav>
     <ul>
       <li><a href="#">Library</a></li>
@@ -16,14 +8,16 @@
   </nav>
   <div>
     <div>
-      <h2 class="">Design Generator</h2>
-      <p>Convert your components from code into Figma designs.</p>
+      <h2 type-pg-heading>Design Generator</h2>
+      <p class="type-pg-description">Convert your components from code into Figma designs.</p>
       <select id="component-dropdown">
         <option value="rectangle">Rectangle</option>
         <option value="circle">Circle</option>
         <option value="text">Text</option>
       </select>
-      <button id="create">Generate</button>
+      <button id="create">
+        <p class="type-pg-action">Generate</p>
+      </button>
      
     </div>
     <div>
