@@ -1,29 +1,45 @@
+<link rel="stylesheet" href="../dist/styles.css">
+
 <style>
+
   body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 8px;
+    background-color: #2C2C2C;
   }
-  button, select {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
-  }
-  .green {
-    color: #13AE5C;
-  }
-  .grey100 {
-    color: #FEFEFE;
-  }
+  
 </style>
-<h2>Component Generator</h2>
-<select id="component-dropdown">
-  <option value="rectangle">Rectangle</option>
-  <option value="circle">Circle</option>
-  <option value="text">Text</option>
-</select>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+
+<div class="bg-charcoal">
+  <nav>
+    <ul>
+      <li><a href="#">Library</a></li>
+    </ul>
+  </nav>
+  <div>
+    <div>
+      <h2 class="">Design Generator</h2>
+      <p>Convert your components from code into Figma designs.</p>
+      <select id="component-dropdown">
+        <option value="rectangle">Rectangle</option>
+        <option value="circle">Circle</option>
+        <option value="text">Text</option>
+      </select>
+      <button id="create">Generate</button>
+     
+    </div>
+    <div>
+      <h2 class="">Properties</h2>
+      <p>Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+      <input type="text" name="text" placeholder="Text" aria-label="Text" />
+      <select id="component-dropdown">
+        <option value="rectangle">Rectangle</option>
+        <option value="circle">Circle</option>
+        <option value="text">Text</option>
+      </select>
+    </div>
+    <button id="cancel">Cancel</button>
+  </div>
+</div>
+
 <script>
 
 document.getElementById('create').onclick = () => {

@@ -95,6 +95,8 @@ const colors = {
   disabled: 'rgba(0, 0, 0, 0.12)',
   warmGrey: '#FCF9F6',
   black: '#000000',
+  green: '#13AE5C',
+  charcoal: '#2C2C2C',
 } as const
 
 export { buttonColors, buttonHoverColors, colors }
