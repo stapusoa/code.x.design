@@ -11,16 +11,16 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js', ".json"],
 	},
 	module: {
-		rules: [
-			{
-			test: /\.tsx?$/,
-			use: 'ts-loader',
-			exclude: /node_modules/,
-			},
+    rules: [
       {
-        test: /\.css$/,  // CSS files
-        use: ['style-loader', 'css-loader'],  // Process CSS files
-    },
-		],
-	}
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ],
+  }  
 };
