@@ -1,5 +1,7 @@
+const path = require('path');
+
 module.exports = {
-	entry: './src/code.js',
+	entry: './code.js',
 	mode: "production",
 	output: {
 		path: __dirname,
@@ -15,6 +17,10 @@ module.exports = {
 			use: 'ts-loader',
 			exclude: /node_modules/,
 			},
+      {
+        test: /\.css$/,  // CSS files
+        use: ['style-loader', 'css-loader'],  // Process CSS files
+    },
 		],
 	}
 };
