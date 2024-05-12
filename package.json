@@ -4,11 +4,10 @@
   "description": "Component generator - from code to Figma designs.",
   "main": "code.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build:css": "unocss 'src/**/*.html' 'src/**/*.js' -o dist/styles.css",
+    "build": "webpack --mode production",
+    "watch": "webpack --watch",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
-    "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
-    "watch": "webpack --watch"
+    "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix ."
   },
   "author": "Sara Tapusoa",
   "license": "MIT",
