@@ -7,6 +7,7 @@ export const unoTheme = {
   fontFamily: {
     archivo: 'Archivo Narrow',
     roboto: 'Roboto',
+    inter: 'Inter',
   },
   boxShadow: {
     sm: '0 1px 3px rgba(0, 0, 0, 0.1)',
