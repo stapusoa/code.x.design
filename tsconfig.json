@@ -21,6 +21,6 @@
     "uno.config.ts",
     "dist/styles.css",
     "src/unoTheme.ts",
-    "src/ui.html",
+    "src/ui.html", "dist/code.js",
   ]
 }

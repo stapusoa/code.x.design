@@ -1,11 +1,30 @@
 <link rel="stylesheet" type="css" href="./dist/styles.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
 
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .relative{position:relative;}
-.m-20{margin:5rem;}
+.mx{margin-left:1rem;margin-right:1rem;}
 .mx-auto{margin-left:auto;margin-right:auto;}
+.my{margin-top:1rem;margin-bottom:1rem;}
+.mb{margin-bottom:1rem;}
+.me{margin-inline-end:1rem;}
+.ml{margin-left:1rem;}
+.mr{margin-right:1rem;}
+.ms{margin-inline-start:1rem;}
+.mt{margin-top:1rem;}
 .mt-2{margin-top:0.5rem;}
 .mt-5{margin-top:1.25rem;}
+.m-0 {
+  margin: 0;
+}
+.p-0 {
+  padding: 0;
+}
 .block{display:block;}
 .max-w-7xl{max-width:80rem;}
 .w-full{width:100%;}
@@ -15,25 +34,38 @@
 .items-end{align-items:flex-end;}
 .gap-2{gap:0.5rem;}
 .gap-4{gap:1rem;}
-.gap-5{gap:1.25rem;}
-.b,
+.bottom {
+  border-bottom: 1px solid rgb(163 163 163);
+}
 .border{border-width:1px;}
-.border-b{border-bottom-width:1px;}
+.border-b{border-bottom:1px solid;}
 .border-neutral-400{--un-border-opacity:1;border-color:rgb(163 163 163 / var(--un-border-opacity));}
 .border-neutral-700{--un-border-opacity:1;border-color:rgb(64 64 64 / var(--un-border-opacity));}
+.rounded{border-radius:0.25rem;}
 .rounded-\[0\.25px\]{border-radius:0.25px;}
+.rounded-lg{border-radius:0.5rem;}
 .rounded-md{border-radius:0.375rem;}
+.rounded-sm{border-radius:0.125rem;}
+.rounded-xl{border-radius:0.75rem;}
 .border-none{border-style:none;}
 .bg-charcoal{--un-bg-opacity:1;background-color:rgb(44 44 44 / var(--un-bg-opacity));}
 .bg-green{--un-bg-opacity:1;background-color:rgb(19 174 92 / var(--un-bg-opacity));}
 .bg-transparent{background-color:transparent;}
-.px-1{padding-left:0.25rem;padding-right:0.25rem;}
+.px,
 .px-4{padding-left:1rem;padding-right:1rem;}
+.px-1{padding-left:0.25rem;padding-right:0.25rem;}
+.px-3{padding-left:0.75rem;padding-right:0.75rem;}
 .py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem;}
 .py-1{padding-top:0.25rem;padding-bottom:0.25rem;}
 .py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
-.py-3{padding-top:0.75rem;padding-bottom:0.75rem;}
+.py-3{padding-top: 0.75rem; padding-bottom: 0.75rem;}
 .py-4{padding-top:1rem;padding-bottom:1rem;}
+.pb{padding-bottom:1rem;}
+.pe{padding-inline-end:1rem;}
+.pl{padding-left:1rem;}
+.pr{padding-right:1rem;}
+.ps{padding-inline-start:1rem;}
+.pt{padding-top:1rem;}
 .text-4{font-size:1rem;}
 .text-base{font-size:16px;line-height:24px;}
 .text-xs{font-size:12px;line-height:16px;}
@@ -41,6 +73,7 @@
 .text-stone-400{--un-text-opacity:1;color:rgb(168 162 158 / var(--un-text-opacity));}
 .text-stone-50{--un-text-opacity:1;color:rgb(250 250 249 / var(--un-text-opacity));}
 .text-zinc-300{--un-text-opacity:1;color:rgb(212 212 216 / var(--un-text-opacity));}
+.text-white { color: white;}
 .font-medium{font-weight:500;}
 .font-normal{font-weight:400;}
 .font-semibold{font-weight:600;}
@@ -54,25 +87,48 @@
 .focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
 </style>
 
-<div class="m-20">
-  <div class="bg-charcoal w-full">
-    <div class="py-3">
-      <div class="mx-auto max-w-7xl">
-        <div class="relative flex flex-col gap-5 border-b border-neutral-400 py-2 px-4">
-          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab1">Library</button>
-          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab2">Import</button>
-          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab3">Create</button>
+
+<div class="bg-charcoal w-full" id="myTabs">
+  <div class="mx-auto max-w-7xl border-b border-neutral-700">
+    <div class="relative flex flex-row gap-4 py-3 px-4">
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Library</button>
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab2')">Import</button>
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Create</button>
+    </div>
+  </div>
+  <div>
+    <div class="px-4 py-2 tabcontent" id="tab1">
+      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-4">Component</p>
+            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>  
+          </div>
+          <button class="bg-green px-4 py-1 rounded-md" id="create">
+            <p class="text-4 font-medium text-stone-200">Generate</p>
+          </button>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="px-4 py-2" id="tab1">
-        <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
-          <div>
-            <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
-            <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
+        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
+        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div>
+              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
+            </div>
           </div>
-          <div class="flex flex-row gap-4 items-end">
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
             <div class="flex flex-col w-full gap-2">
               <p class="text-4">Component</p>
               <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
@@ -81,13 +137,78 @@
                 <option value="text">Text</option>
               </select>  
             </div>
-            <button class="bg-green px-4 py-1 rounded-md" id="create">
-              <p class="text-4 font-medium text-stone-200">Generate</p>
-            </button>
           </div>
         </div>
+        <button id="cancel">Cancel</button>
+      </div>
+    </div>
+    <div class="px-4 py-2 tabcontent" id="tab2">
+      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-4">Component</p>
+            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>  
+          </div>
+          <button class="bg-green px-4 py-1 rounded-md" id="create">
+            <p class="text-4 font-medium text-stone-200">Generate</p>
+          </button>
+        </div>
+      </div>
       <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
-        <h2 class="type-pg-heading">Properties</h2>
+        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
+        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div>
+              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
+            </div>
+          </div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div class="flex flex-col w-full gap-2">
+              <p class="text-4">Component</p>
+              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+              </select>  
+            </div>
+          </div>
+        </div>
+        <button id="cancel">Cancel</button>
+      </div>
+    </div>
+    <div class="px-4 py-2 tabcontent" id="tab3">
+      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-4">Component</p>
+            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>  
+          </div>
+          <button class="bg-green px-4 py-1 rounded-md" id="create">
+            <p class="text-4 font-medium text-stone-200">Generate</p>
+          </button>
+        </div>
+      </div>
+      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
+        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
         <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
         <div>
           <div class="flex-col">
@@ -112,10 +233,29 @@
       </div>
     </div>
   </div>
+</div>
+
 
         
 
 <script>
+
+
+
+function openTab(event, tabName) {
+  var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+  
+}
 
 document.getElementById('create').onclick = () => {
   const componentType = document.getElementById('component-dropdown').value;
