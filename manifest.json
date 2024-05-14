@@ -2,7 +2,7 @@
   "name": "code.x.design",
   "id": "1371152593350372518",
   "api": "1.0.0",
-  "main": "code.js",
+  "main": "dist/code.js",
   "capabilities": [],
   "enableProposedApi": false,
   "documentAccess": "dynamic-page",

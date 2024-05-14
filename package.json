@@ -2,10 +2,12 @@
   "name": "codexdesign",
   "version": "1.0.0",
   "description": "Component generator - from code to Figma designs.",
-  "main": "code.js",
+  "main": "dist/code.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "watch": "webpack --watch",
+    "start": "webpack --watch",
+    "build:ts": "tsc -p tsconfig.json",
+    "build:css": "unocss 'src/**/*.html' 'src/**/*.js' -o dist/styles.css",
+    "build:plugin": "webpack --mode production",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix ."
   },
@@ -20,6 +22,7 @@
     "@unocss/preset-icons": "^0.60.2",
     "@unocss/preset-typography": "^0.60.2",
     "@unocss/preset-web-fonts": "^0.60.2",
+    "@unocss/webpack": "^0.60.0",
     "css-loader": "^7.1.1",
     "eslint": "^8.57.0",
     "style-loader": "^4.0.0",

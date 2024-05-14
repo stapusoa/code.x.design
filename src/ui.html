@@ -1,38 +1,118 @@
-<link rel="stylesheet" href="../dist/styles.css">
+<link rel="stylesheet" type="css" href="./dist/styles.css">
 
-<div class="bg-charcoal w-full">
-  <nav>
-    <ul>
-      <li><a href="#">Library</a></li>
-    </ul>
-  </nav>
-  <div>
-    <div>
-      <h2 type-pg-heading>Design Generator</h2>
-      <p class="type-pg-description">Convert your components from code into Figma designs.</p>
-      <select id="component-dropdown">
-        <option value="rectangle">Rectangle</option>
-        <option value="circle">Circle</option>
-        <option value="text">Text</option>
-      </select>
-      <button id="create">
-        <p class="type-pg-action">Generate</p>
-      </button>
-     
+<style>
+.relative{position:relative;}
+.m-20{margin:5rem;}
+.mx-auto{margin-left:auto;margin-right:auto;}
+.mt-2{margin-top:0.5rem;}
+.mt-5{margin-top:1.25rem;}
+.block{display:block;}
+.max-w-7xl{max-width:80rem;}
+.w-full{width:100%;}
+.flex{display:flex;}
+.flex-row{flex-direction:row;}
+.flex-col{flex-direction:column;}
+.items-end{align-items:flex-end;}
+.gap-2{gap:0.5rem;}
+.gap-4{gap:1rem;}
+.gap-5{gap:1.25rem;}
+.b,
+.border{border-width:1px;}
+.border-b{border-bottom-width:1px;}
+.border-neutral-400{--un-border-opacity:1;border-color:rgb(163 163 163 / var(--un-border-opacity));}
+.border-neutral-700{--un-border-opacity:1;border-color:rgb(64 64 64 / var(--un-border-opacity));}
+.rounded-\[0\.25px\]{border-radius:0.25px;}
+.rounded-md{border-radius:0.375rem;}
+.border-none{border-style:none;}
+.bg-charcoal{--un-bg-opacity:1;background-color:rgb(44 44 44 / var(--un-bg-opacity));}
+.bg-green{--un-bg-opacity:1;background-color:rgb(19 174 92 / var(--un-bg-opacity));}
+.bg-transparent{background-color:transparent;}
+.px-1{padding-left:0.25rem;padding-right:0.25rem;}
+.px-4{padding-left:1rem;padding-right:1rem;}
+.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem;}
+.py-1{padding-top:0.25rem;padding-bottom:0.25rem;}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
+.py-3{padding-top:0.75rem;padding-bottom:0.75rem;}
+.py-4{padding-top:1rem;padding-bottom:1rem;}
+.text-4{font-size:1rem;}
+.text-base{font-size:16px;line-height:24px;}
+.text-xs{font-size:12px;line-height:16px;}
+.text-stone-200{--un-text-opacity:1;color:rgb(231 229 228 / var(--un-text-opacity));}
+.text-stone-400{--un-text-opacity:1;color:rgb(168 162 158 / var(--un-text-opacity));}
+.text-stone-50{--un-text-opacity:1;color:rgb(250 250 249 / var(--un-text-opacity));}
+.text-zinc-300{--un-text-opacity:1;color:rgb(212 212 216 / var(--un-text-opacity));}
+.font-medium{font-weight:500;}
+.font-normal{font-weight:400;}
+.font-semibold{font-weight:600;}
+.font-inter{font-family:"Inter", sans-serif;}
+.font-sans{font-family:"Roboto","Archivo Narrow","Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+.outline-2{outline-width:2px;}
+.outline-neutral-700{--un-outline-color-opacity:1;outline-color:rgb(64 64 64 / var(--un-outline-color-opacity));}
+.outline-offset-8{outline-offset:8px;}
+.outline{outline-style:solid;}
+.focus\:ring-2:focus{--un-ring-width:2px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
+.focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
+</style>
+<div class="m-20">
+  <div class="bg-charcoal w-full">
+    <div class="py-3">
+      <div class="mx-auto max-w-7xl">
+        <div class="relative flex flex-col gap-5 border-b border-neutral-400 py-2 px-4">
+          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab1">Library</button>
+          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab2">Import</button>
+          <button class="bg-transparent border-none type-pg-tab active:type-pg-active" data-tab="tab3">Create</button>
+        </div>
+      </div>
     </div>
     <div>
-      <h2 class="">Properties</h2>
-      <p>Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
-      <input type="text" name="text" placeholder="Text" aria-label="Text" />
-      <select id="component-dropdown">
-        <option value="rectangle">Rectangle</option>
-        <option value="circle">Circle</option>
-        <option value="text">Text</option>
-      </select>
+      <div class="px-4 py-2" id="tab1">
+        <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+          <div>
+            <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+            <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+          </div>
+          <div class="flex flex-row gap-4 items-end">
+            <div class="flex flex-col w-full gap-2">
+              <p class="text-4">Component</p>
+              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+              </select>  
+            </div>
+            <button class="bg-green px-4 py-1 rounded-md" id="create">
+              <p class="text-4 font-medium text-stone-200">Generate</p>
+            </button>
+          </div>
+        </div>
+      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
+        <h2 class="type-pg-heading">Properties</h2>
+        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div>
+              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
+            </div>
+          </div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div class="flex flex-col w-full gap-2">
+              <p class="text-4">Component</p>
+              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+              </select>  
+            </div>
+          </div>
+        </div>
+        <button id="cancel">Cancel</button>
+      </div>
     </div>
-    <button id="cancel">Cancel</button>
   </div>
-</div>
+
+        
 
 <script>
 

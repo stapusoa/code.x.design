@@ -1,3 +1,4 @@
+import '../dist/styles.css';
 
 const width = 450;
 const height = 600;

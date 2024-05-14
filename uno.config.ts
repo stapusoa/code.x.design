@@ -3,7 +3,6 @@ import { defineConfig, presetUno, presetAttributify } from 'unocss'
 import { presetTypography } from '@unocss/preset-typography'
 import { presetWebFonts } from 'unocss'
 import presetIcons from '@unocss/preset-icons'
-import { unoShortcuts } from './src/unoShortcuts'
 import { unoTheme } from './src/unoTheme'
 
 export default defineConfig({
@@ -26,6 +25,5 @@ export default defineConfig({
       }
     }),
   ],
-  theme: unoTheme,
-  shortcuts: unoShortcuts,
+  theme: unoTheme
 })
