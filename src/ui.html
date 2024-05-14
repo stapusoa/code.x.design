@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="css" href="./dist/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style>
   * {
@@ -156,6 +157,53 @@ select::-ms-expand {
   -ms-word-break: normal;
   word-break: normal;
 }
+
+.dropdown2 {
+  cursor: pointer;
+  user-select: none;
+}
+
+.select-box2 {
+  padding: 8px 24px 8px 12px; /* Extra padding on the right for the icon */
+  border: 1px solid white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.material-icons {
+  color: white; /* White icon */
+  font-size: 24px; /* Adjust size as needed */
+  vertical-align: middle;
+}
+
+span {
+  color: white;
+}
+
+.menu {
+  background-color: #fff; /* Light background for the dropdown items */
+  color: #333; /* Dark text color for visibility */
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-top: 4px; /* Space between select box and dropdown */
+  position: absolute; /* Position absolutely within the relative parent */
+  width: calc(100% - 2px); /* Full width of the dropdown */
+  box-sizing: border-box; /* Include padding and border in the width */
+  z-index: 1000; /* Ensure it stacks on top */
+}
+
+.menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #eee; /* Light grey background on hover */
+}
+
 </style>
 
 
@@ -188,6 +236,17 @@ select::-ms-expand {
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
             </select>
+            </div>
+            <div class="dropdown2">
+              <div class="select-box2">
+                <span>Select</span>
+                <span class="material-icons">expand_more</span>
+              </div>
+              <div class="menu" style="display: none;">
+                <div class="menu-item">Option 1</div>
+                <div class="menu-item">Option 2</div>
+                <div class="menu-item">Option 3</div>
+              </div>
             </div>
             <select id="dropdown">
               <option value="option1">Option 1</option>
@@ -352,6 +411,28 @@ function openTab(event, tabName) {
     event.currentTarget.className += " active";
   
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdown = document.querySelector('.dropdown2');
+  const menu = document.querySelector('.menu');
+
+  dropdown.addEventListener('click', function() {
+    // This toggles the display of the menu on click
+    if (menu.style.display === 'none') {
+      menu.style.display = 'block';
+    } else {
+      menu.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+      // Update the select box text with the selected item's text
+      document.querySelector('.select-box span:first-child').textContent = this.textContent;
+      menu.style.display = 'none'; // Close the menu after selection
+    });
+  });
+});
 
 document.getElementById('create').onclick = () => {
   const componentType = document.getElementById('component-dropdown').value;
