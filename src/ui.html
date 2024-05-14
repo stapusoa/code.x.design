@@ -1,12 +1,19 @@
 <link rel="stylesheet" type="css" href="./dist/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="@tailwindcss/forms">
+<link href="@tailwind/base">
+<link href="@tailwind/components">
+<link href="@tailwind/utilities">
 
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+.bottom {
+  border-bottom: 1px solid rgb(163 163 163);
 }
 .relative{position:relative;}
 .mx{margin-left:1rem;margin-right:1rem;}
@@ -35,9 +42,7 @@
 .items-end{align-items:flex-end;}
 .gap-2{gap:0.5rem;}
 .gap-4{gap:1rem;}
-.bottom {
-  border-bottom: 1px solid rgb(163 163 163);
-}
+
 .border{border-width:1px;}
 .border-b{border-bottom:1px solid;}
 .border-neutral-400{--un-border-opacity:1;border-color:rgb(163 163 163 / var(--un-border-opacity));}
@@ -86,98 +91,9 @@
 .outline{outline-style:solid;}
 .focus\:ring-2:focus{--un-ring-width:2px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
-#dropdown {
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-}
 
-#dropdown option {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
 
-#dropdown option:last-child {
-  border-bottom: none;
-}
-.selectdiv {
-  position: relative;
-  /*Don't really need this just for demo styling*/
-  
-  float: left;
-  min-width: 200px;
-  margin: 50px 33%;
-}
 
-/*To remove button from IE11, thank you Matt */
-select::-ms-expand {
-     display: none;
-}
-
-.selectdiv:after {
-  content: '>';
-  font: 17px "Consolas", monospace;
-  color: #333;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  right: 11px;
-  /*Adjust for position however you want*/
-  
-  top: 18px;
-  padding: 0 0 2px;
-  /*left line */
-  
-  position: absolute;
-  pointer-events: none;
-}
-
-.selectdiv select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* Add some styling */
-  
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  height: 50px;
-  float: right;
-  margin: 5px 0px;
-  padding: 0px 24px;
-  font-size: 16px;
-  line-height: 1.75;
-  color: #333;
-  background-color: #ffffff;
-  background-image: none;
-  border: 1px solid #cccccc;
-  -ms-word-break: normal;
-  word-break: normal;
-}
-
-.dropdown2 {
-  cursor: pointer;
-  user-select: none;
-}
-
-.select-box2 {
-  padding: 8px 24px 8px 12px; /* Extra padding on the right for the icon */
-  border: 1px solid white;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: transparent;
-}
-
-.material-icons {
-  color: white; /* White icon */
-  font-size: 24px; /* Adjust size as needed */
-  vertical-align: middle;
-}
 
 span {
   color: white;
@@ -225,42 +141,27 @@ span {
         <div class="flex flex-row gap-4 items-end">
           <div class="flex flex-col w-full gap-2">
             <p class="text-xs font-normal font-inter text-stone-400">Components</p>
-            <ul id="dropdown">
-              <li><a href="#">Rectangle</a></li>
-              <li><a href="#">Rectangle</a></li>
-              <li><a href="#">Rectangle</a></li>
-            </ul>
-            <div class="selectdiv">
-              <select>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            </div>
-            <div class="dropdown2">
-              <div class="select-box2">
-                <span>Select</span>
-                <span class="material-icons">expand_more</span>
+            <div class="dropdown cursor-pointer select-none">
+              <div class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
+                <span class="text-xs font-normal font-inter text-stone-50">Select</span>
+                <span class="material-icons text-stone-50 text-base align-middle">expand_more</span>
               </div>
               <div class="menu" style="display: none;">
-                <div class="menu-item">Option 1</div>
-                <div class="menu-item">Option 2</div>
-                <div class="menu-item">Option 3</div>
+                <div class="menu-item" value="rectangle">Rectangle</div>
+                <div class="menu-item" value="circle">Circle</div>
+                <div class="menu-item" value="text">Text</div>
               </div>
             </div>
-            <select id="dropdown">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-            <details class="dropdown">
-              <summary>Select</summary>
-              <ul>
-                <li><a href="#">Rectangle</a></li>
-                <li><a href="#">Rectangle</a></li>
-                <li><a href="#">Rectangle</a></li>
-              </ul>
-            </details>
+            <div>
+              <div>
+                <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location</label>
+                <select id="location" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <option>United States</option>
+                  <option selected>Canada</option>
+                  <option>Mexico</option>
+                </select>
+              </div>
+            </div>
             <select class="mt-2 bg-transparent block border rounded-md border-neutral-700 py-0.5 pl-1 pr-5 text-stone-400 focus:ring-2 focus:ring-indigo-600">
               <option value="rectangle">Rectangle</option>
               <option value="circle">Circle</option>
@@ -273,8 +174,8 @@ span {
         </div>
       </div>
       <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
-        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
-        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <h2 class="text-base font-semibold font-sans text-stone-50 pb-1">Properties</h2>
+        <p class="text-xs font-normal font-inter text-stone-400">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
         <div>
           <div class="flex-col">
             <p class="text-4 font-medium text-zinc-300">Component</p>
@@ -395,8 +296,6 @@ span {
 
 <script>
 
-
-
 function openTab(event, tabName) {
   var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -413,7 +312,7 @@ function openTab(event, tabName) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const dropdown = document.querySelector('.dropdown2');
+  const dropdown = document.querySelector('.dropdown');
   const menu = document.querySelector('.menu');
 
   dropdown.addEventListener('click', function() {

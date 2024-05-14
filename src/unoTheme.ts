@@ -189,6 +189,7 @@ export const unoTheme = {
     },
     padding: {
       p: {
+        '0': 'padding: 0;',
         '1': 'padding: 4px;',
         '2': 'padding: 8px;',
         '2.5': 'padding: 10px;',
