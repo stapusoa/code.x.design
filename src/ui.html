@@ -1,10 +1,10 @@
 <link rel="stylesheet" type="css" href="./dist/styles.css">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="@tailwindcss/forms">
-<link href="@tailwind/base">
-<link href="@tailwind/components">
-<link href="@tailwind/utilities">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+/>
 
 <style>
   * {
@@ -120,6 +120,68 @@ span {
   background-color: #eee; /* Light grey background on hover */
 }
 
+select:not([multiple],[size]) {
+    padding-right: calc(var(--pico-form-element-spacing-horizontal) + 1.5rem);
+    padding-left: var(--pico-form-element-spacing-horizontal);
+    padding-inline-start: var(--pico-form-element-spacing-horizontal);
+    padding-inline-end: calc(var(--pico-form-element-spacing-horizontal) + 1.5rem);
+    background-image: var(--pico-icon-chevron);
+    background-position: center right .75rem;
+    background-size: 1rem auto;
+    background-repeat: no-repeat;
+}
+
+input::-webkit-input-placeholder, input::placeholder, select:invalid, textarea::-webkit-input-placeholder, textarea::placeholder {
+    color: var(--pico-form-element-placeholder-color);
+    opacity: 1;
+}
+
+input:not([type=checkbox],[type=radio]), select, textarea {
+    margin-bottom: var(--pico-spacing);
+}
+
+input, select, textarea {
+    --pico-background-color: var(--pico-form-element-background-color);
+    --pico-border-color: var(--pico-form-element-border-color);
+    --pico-color: var(--pico-form-element-color);
+    --pico-box-shadow: none;
+    border: var(--pico-border-width) solid var(--pico-border-color);
+    border-radius: var(--pico-border-radius);
+    outline: 0;
+    background-color: var(--pico-background-color);
+    box-shadow: var(--pico-box-shadow);
+    color: var(--pico-color);
+    font-weight: var(--pico-font-weight);
+    transition: background-color var(--pico-transition), border-color var(--pico-transition), color var(--pico-transition), box-shadow var(--pico-transition);
+}
+
+input:not([type=checkbox],[type=radio],[type=range],[type=file]), select, textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: var(--pico-form-element-spacing-vertical) var(--pico-form-element-spacing-horizontal);
+}
+
+button[type=submit], input:not([type=checkbox],[type=radio]), select, textarea {
+    width: 100%;
+}
+
+select {
+    text-transform: none;
+}
+
+input, optgroup, select, textarea {
+    margin: 0;
+    font-size: 1rem;
+    line-height: var(--pico-line-height);
+    font-family: inherit;
+    letter-spacing: inherit;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
 </style>
 
 
@@ -141,27 +203,6 @@ span {
         <div class="flex flex-row gap-4 items-end">
           <div class="flex flex-col w-full gap-2">
             <p class="text-xs font-normal font-inter text-stone-400">Components</p>
-            <div class="dropdown cursor-pointer select-none">
-              <div class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
-                <span class="text-xs font-normal font-inter text-stone-50">Select</span>
-                <span class="material-icons text-stone-50 text-base align-middle">expand_more</span>
-              </div>
-              <div class="menu" style="display: none;">
-                <div class="menu-item" value="rectangle">Rectangle</div>
-                <div class="menu-item" value="circle">Circle</div>
-                <div class="menu-item" value="text">Text</div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location</label>
-                <select id="location" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                  <option>United States</option>
-                  <option selected>Canada</option>
-                  <option>Mexico</option>
-                </select>
-              </div>
-            </div>
             <select class="mt-2 bg-transparent block border rounded-md border-neutral-700 py-0.5 pl-1 pr-5 text-stone-400 focus:ring-2 focus:ring-indigo-600">
               <option value="rectangle">Rectangle</option>
               <option value="circle">Circle</option>
@@ -207,7 +248,7 @@ span {
         <div class="flex flex-row gap-4 items-end">
           <div class="flex flex-col w-full gap-2">
             <p class="text-4">Component</p>
-            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+            <select id="component-dropdown" class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
               <option value="rectangle">Rectangle</option>
               <option value="circle">Circle</option>
               <option value="text">Text</option>
@@ -258,6 +299,37 @@ span {
               <option value="text">Text</option>
             </select>  
           </div>
+          <label for="select">Select</label>
+            <select id="select" name="select" required>
+              <option value="rectangle" value selected>Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>
+            <div class="dropdown cursor-pointer select-none">
+              <div class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
+                <span class="text-xs font-normal font-inter text-stone-50">Select</span>
+                <span class="material-icons text-stone-50 text-base align-middle">expand_more</span>
+              </div>
+              <div class="menu" style="display: none;">
+                <div class="menu-item" value="rectangle">Rectangle</div>
+                <div class="menu-item" value="circle">Circle</div>
+                <div class="menu-item" value="text">Text</div>
+              </div>
+            </div>
+
+            <div class="dropdown cursor-pointer select-none">
+              <label for="components" class="text-stone-200"></label>
+              <select id="components" class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
+                <option>Hello</option>              
+</select>
+              <div class="menu" style="display: none;">
+                <div class="menu-item" value="rectangle">Rectangle</div>
+                <div class="menu-item" value="circle">Circle</div>
+                <div class="menu-item" value="text">Text</div>
+              </div>
+            </div>
+
+
           <button class="bg-green px-4 py-1 rounded-md" id="create">
             <p class="text-4 font-medium text-stone-200">Generate</p>
           </button>
