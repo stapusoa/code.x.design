@@ -64,6 +64,7 @@ export const unoTheme = {
     extend: {
         margin: {
             m: {
+                '0': 'margin: 0;',
                 '1': 'margin: 4px;',
                 '2': 'margin: 8px;',
                 '2.5': 'margin: 10px;',
@@ -188,6 +189,7 @@ export const unoTheme = {
         },
         padding: {
             p: {
+                '0': 'padding: 0;',
                 '1': 'padding: 4px;',
                 '2': 'padding: 8px;',
                 '2.5': 'padding: 10px;',
