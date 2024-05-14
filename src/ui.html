@@ -85,28 +85,124 @@
 .outline{outline-style:solid;}
 .focus\:ring-2:focus{--un-ring-width:2px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
+#dropdown {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+#dropdown option {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#dropdown option:last-child {
+  border-bottom: none;
+}
+.selectdiv {
+  position: relative;
+  /*Don't really need this just for demo styling*/
+  
+  float: left;
+  min-width: 200px;
+  margin: 50px 33%;
+}
+
+/*To remove button from IE11, thank you Matt */
+select::-ms-expand {
+     display: none;
+}
+
+.selectdiv:after {
+  content: '>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+  /*Adjust for position however you want*/
+  
+  top: 18px;
+  padding: 0 0 2px;
+  /*left line */
+  
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -ms-word-break: normal;
+  word-break: normal;
+}
 </style>
 
 
 <div class="bg-charcoal w-full" id="myTabs">
   <div class="mx-auto max-w-7xl border-b border-neutral-700">
-    <div class="relative flex flex-row gap-4 py-3 px-4">
+    <div class="relative flex flex-row gap-4 p-3">
       <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Library</button>
       <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab2')">Import</button>
       <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Create</button>
     </div>
   </div>
   <div>
-    <div class="px-4 py-2 tabcontent" id="tab1">
-      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+    <div class="p-3 tabcontent" id="tab1">
+      <div class="flex flex-col gap-4 p-3 border rounded-md border-neutral-700">
         <div>
-          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <h2 class="text-base font-semibold font-sans text-stone-50 pb-1">Design Generator</h2>
           <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
         </div>
         <div class="flex flex-row gap-4 items-end">
           <div class="flex flex-col w-full gap-2">
-            <p class="text-4">Component</p>
-            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+            <p class="text-xs font-normal font-inter text-stone-400">Components</p>
+            <ul id="dropdown">
+              <li><a href="#">Rectangle</a></li>
+              <li><a href="#">Rectangle</a></li>
+              <li><a href="#">Rectangle</a></li>
+            </ul>
+            <div class="selectdiv">
+              <select>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            </div>
+            <select id="dropdown">
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+            <details class="dropdown">
+              <summary>Select</summary>
+              <ul>
+                <li><a href="#">Rectangle</a></li>
+                <li><a href="#">Rectangle</a></li>
+                <li><a href="#">Rectangle</a></li>
+              </ul>
+            </details>
+            <select class="mt-2 bg-transparent block border rounded-md border-neutral-700 py-0.5 pl-1 pr-5 text-stone-400 focus:ring-2 focus:ring-indigo-600">
               <option value="rectangle">Rectangle</option>
               <option value="circle">Circle</option>
               <option value="text">Text</option>
