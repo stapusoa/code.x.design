@@ -14,7 +14,10 @@ export default (env, argv) => ({
       rules: [
         {
             test: /\.tsx?$/,
-            use: 'ts-loader',
+            use: [
+                // resolve(__dirname, './custom-loader'),
+                'ts-loader'
+            ],
             exclude: /node_modules/,
         },
         {
