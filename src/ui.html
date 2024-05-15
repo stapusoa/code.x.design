@@ -1,32 +1,379 @@
+<link rel="stylesheet" type="css" href="./dist/styles.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <style>
-  body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 8px;
-  }
-  button, select {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
-  }
-  .green {
-    color: #13AE5C;
-  }
-  .grey100 {
-    color: #FEFEFE;
-  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.bottom {
+  border-bottom: 1px solid rgb(163 163 163);
+}
+.m-0 {
+  margin: 0;
+}
+.p-0 {
+  padding: 0;
+}
+
+.font-\[Material_Symbols_Outlined\]{font-family:Material Symbols Outlined;}
+
+.pointer-events-none{pointer-events:none;}
+.absolute{position:absolute;}
+.relative{position:relative;}
+.inset-y-0{top:0;bottom:0;}
+.right-0{right:0;}
+.mx{margin-left:1rem;margin-right:1rem;}
+.mx-auto{margin-left:auto;margin-right:auto;}
+.my{margin-top:1rem;margin-bottom:1rem;}
+.mb{margin-bottom:1rem;}
+.mb-1px{margin-bottom:1px;}
+.me{margin-inline-end:1rem;}
+.ml{margin-left:1rem;}
+.mr{margin-right:1rem;}
+.ms{margin-inline-start:1rem;}
+.mt{margin-top:1rem;}
+.mt-2{margin-top:0.5rem;}
+.mt-5{margin-top:1.25rem;}
+.block{display:block;}
+.inline-block{display:inline-block;}
+.max-w-7xl{max-width:80rem;}
+.w-full{width:100%;}
+.flex{display:flex;}
+.flex-row{flex-direction:row;}
+.flex-col{flex-direction:column;}
+.cursor-pointer{cursor:pointer;}
+.select-none{-webkit-user-select:none;user-select:none;}
+.appearance-none{-webkit-appearance:none;appearance:none;}
+.items-end{align-items:flex-end;}
+.items-center{align-items:center;}
+.justify-between{justify-content:space-between;}
+.gap-2{gap:0.5rem;}
+.gap-3{gap:0.75rem;}
+.gap-4{gap:1rem;}
+.b,
+.border{border-width:1px;}
+.border-b{border-bottom-width:1px;}
+.border-neutral-700{--un-border-opacity:1;border-color:rgb(64 64 64 / var(--un-border-opacity));}
+.rounded{border-radius:0.25rem;}
+.rounded-\[0\.25px\]{border-radius:0.25px;}
+.rounded-lg{border-radius:0.5rem;}
+.rounded-md{border-radius:0.375rem;}
+.rounded-sm{border-radius:0.125rem;}
+.rounded-xl{border-radius:0.75rem;}
+.border-none{border-style:none;}
+.bg-charcoal{--un-bg-opacity:1;background-color:rgb(44 44 44 / var(--un-bg-opacity));}
+.bg-green{--un-bg-opacity:1;background-color:rgb(19 174 92 / var(--un-bg-opacity));}
+.bg-slate-500{--un-bg-opacity:1;background-color:rgb(100 116 139 / var(--un-bg-opacity));}
+.bg-transparent{background-color:transparent;}
+.p-3{padding:0.75rem;}
+.px,
+.px-4{padding-left:1rem;padding-right:1rem;}
+.px-1{padding-left:0.25rem;padding-right:0.25rem;}
+.px-2{padding-left:0.5rem;padding-right:0.5rem;}
+.px-3{padding-left:0.75rem;padding-right:0.75rem;}
+.px-6{padding-left:1.5rem;padding-right:1.5rem;}
+.py,
+.py-4{padding-top:1rem;padding-bottom:1rem;}
+.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem;}
+.py-1{padding-top:0.25rem;padding-bottom:0.25rem;}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
+.pb,
+.pb-4{padding-bottom:1rem;}
+.pb-1{padding-bottom:0.25rem;}
+.pe{padding-inline-end:1rem;}
+.pl{padding-left:1rem;}
+.pl-2{padding-left:0.5rem;}
+.pr{padding-right:1rem;}
+.pr-5{padding-right:1.25rem;}
+.ps{padding-inline-start:1rem;}
+.pt{padding-top:1rem;}
+.align-middle{vertical-align:middle;}
+.text-4{font-size:1rem;}
+.text-5{font-size:1.25rem;}
+.text-base{font-size:16px;line-height:24px;}
+.text-xs{font-size:12px;line-height:16px;}
+.text-stone-200{--un-text-opacity:1;color:rgb(231 229 228 / var(--un-text-opacity));}
+.text-stone-400{--un-text-opacity:1;color:rgb(168 162 158 / var(--un-text-opacity));}
+.text-stone-50{--un-text-opacity:1;color:rgb(250 250 249 / var(--un-text-opacity));}
+.text-zinc-300{--un-text-opacity:1;color:rgb(212 212 216 / var(--un-text-opacity));}
+.hover\:text-white:hover{--un-text-opacity:1;color:rgb(255 255 255 / var(--un-text-opacity));}
+.active\:text-stone200:active{--un-text-opacity:1;color:rgb(231 229 228 / var(--un-text-opacity));}
+.placeholder\:text-stone-400::placeholder{--un-text-opacity:1;color:rgb(168 162 158 / var(--un-text-opacity));}
+.font-medium{font-weight:500;}
+.font-normal{font-weight:400;}
+.font-semibold{font-weight:600;}
+.font-\[Material_Symbols_Outlined\]{font-family:Material Symbols Outlined;}
+.font-inter{font-family:"Inter", sans-serif;}
+.font-sans{font-family:"Roboto","Archivo Narrow","Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+.outline-2{outline-width:2px;}
+.outline-neutral-700{--un-outline-color-opacity:1;outline-color:rgb(64 64 64 / var(--un-outline-color-opacity));}
+.outline-offset-8{outline-offset:8px;}
+.outline{outline-style:solid;}
+.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px;}
+.focus\:ring-2:focus{--un-ring-width:2px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
+.focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
+
+
+
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+.mb-1px {
+  margin-bottom: 1px;
+}
+
 </style>
 
-<h2>Component Generator</h2>
-<select id="component-dropdown">
-  <option value="rectangle">Rectangle</option>
-  <option value="circle">Circle</option>
-  <option value="text">Text</option>
-</select>
 
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+
+<div class="bg-charcoal w-full" id="myTabs">
+  <div class="mx-auto max-w-7xl border-b border-neutral-700">
+    <div class="relative flex flex-row gap-4 p-3">
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Library</button>
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab2')">Import</button>
+      <button class="bg-transparent border-none text-xs font-semibold text-stone-400 hover:text-white focus:outline-none active:text-stone200 tablinks" onclick="openTab(event, 'tab1')">Create</button>
+    </div>
+  </div>
+  <div>
+    <div class="p-3 tabcontent" id="tab1">
+      <div class="flex flex-col gap-4 p-3 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50 pb-1">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-3 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-xs font-normal font-inter text-stone-400">Components</p>
+            <div class="relative inline-block w-full">
+              <select id="component-dropdown" class="appearance-none w-full bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-medium font-inter text-stone-200 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+                <option value="button">Button</option>
+              </select>  
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-50">
+                <span class="font-[Material_Symbols_Outlined] text-stone-400 text-5">expand_more</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="bg-green px-6 py-2 rounded-md mb-1px" id="create">
+            <p class="text-xs font-medium font-inter text-stone-50">Generate</p>
+          </button>
+        </div>
+        
+      </div>
+      <div class="mt-5 p-3 flex flex-col gap-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50 pb-1">Properties</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        </div>
+        <div class="flex flex-row gap-3 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-xs font-normal font-inter text-stone-400">Children</p>
+            <input class="bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-normal font-inter text-stone-200 placeholder:text-stone-400 focus:ring-2 focus:ring-indigo-600" type="text" name="text" placeholder="Label" aria-label="Text" />
+          </div>
+        </div>
+        <div class="flex flex-col w-full gap-2">
+          <p class="text-xs font-normal font-inter text-stone-400">Variant</p>
+          <div class="relative inline-block w-full">
+            <select class="appearance-none w-full bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-medium font-inter text-stone-200 focus:ring-2 focus:ring-indigo-600">
+             <!-- <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>  -->
+            </select>  
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-50">
+              <span class="font-[Material_Symbols_Outlined] text-stone-400 text-5">expand_more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+       
+      <!--
+    <div class="px-4 py-2 tabcontent" id="tab2">
+      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-4">Component</p>
+            <select id="component-dropdown" class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>  
+          </div>
+          <button class="bg-green px-4 py-1 rounded-md" id="create">
+            <p class="text-4 font-medium text-stone-200">Generate</p>
+          </button>
+        </div>
+      </div>
+      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
+        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
+        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div>
+              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
+            </div>
+          </div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div class="flex flex-col w-full gap-2">
+              <p class="text-4">Component</p>
+              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+              </select>  
+            </div>
+          </div>
+        </div>
+        <button id="cancel">Cancel</button>
+      </div>
+    </div>
+    <div class="px-4 py-2 tabcontent" id="tab3">
+      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
+        <div>
+          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
+          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
+        </div>
+        <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-4">Component</p>
+            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>  
+          </div>
+          <label for="select">Select</label>
+            <select id="select" name="select" required>
+              <option value="rectangle" value selected>Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="text">Text</option>
+            </select>
+            <div class="dropdown cursor-pointer select-none">
+              <div class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
+                <span class="text-xs font-normal font-inter text-stone-50">Select</span>
+                <span class="material-icons text-stone-50 text-base align-middle">expand_more</span>
+              </div>
+              <div class="menu" style="display: none;">
+                <div class="menu-item" value="rectangle">Rectangle</div>
+                <div class="menu-item" value="circle">Circle</div>
+                <div class="menu-item" value="text">Text</div>
+              </div>
+            </div>
+
+            <div class="dropdown cursor-pointer select-none">
+              <label for="components" class="text-stone-200"></label>
+              <select id="components" class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
+                <option>Hello</option>              
+</select>
+              <div class="menu" style="display: none;">
+                <div class="menu-item" value="rectangle">Rectangle</div>
+                <div class="menu-item" value="circle">Circle</div>
+                <div class="menu-item" value="text">Text</div>
+              </div>
+            </div>
+
+
+          <button class="bg-green px-4 py-1 rounded-md" id="create">
+            <p class="text-4 font-medium text-stone-200">Generate</p>
+          </button>
+        </div>
+      </div>
+      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
+        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
+        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
+        <div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div>
+              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
+            </div>
+          </div>
+          <div class="flex-col">
+            <p class="text-4 font-medium text-zinc-300">Component</p>
+            <div class="flex flex-col w-full gap-2">
+              <p class="text-4">Component</p>
+              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="text">Text</option>
+              </select>  
+            </div>
+          </div>
+        </div>
+        <button id="cancel">Cancel</button>
+      </div>
+    </div>  -->
+    <div class="px-3 pb-4">
+      <button class="bg-slate-500 px-6 py-2 rounded-md mb-1px" id="cancel">
+        <p class="text-xs font-medium font-inter text-stone-50">Cancel</p>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+        
+
+
 <script>
+
+function openTab(event, tabName) {
+  var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+  
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdown = document.querySelector('.dropdown');
+  const menu = document.querySelector('.menu');
+
+  dropdown.addEventListener('click', function() {
+    // This toggles the display of the menu on click
+    if (menu.style.display === 'none') {
+      menu.style.display = 'block';
+    } else {
+      menu.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+      // Update the select box text with the selected item's text
+      document.querySelector('.select-box span:first-child').textContent = this.textContent;
+      menu.style.display = 'none'; // Close the menu after selection
+    });
+  });
+});
 
 document.getElementById('create').onclick = () => {
 

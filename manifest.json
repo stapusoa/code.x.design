@@ -2,7 +2,7 @@
   "name": "code.x.design",
   "id": "1371152593350372518",
   "api": "1.0.0",
-  "main": "src/code.js",
+  "main": "dist/code.js",
   "capabilities": [],
   "enableProposedApi": false,
   "documentAccess": "dynamic-page",
@@ -12,7 +12,9 @@
   "ui": "src/ui.html",
   "networkAccess": {
     "allowedDomains": [
-      "none"
+      "https://cdn.jsdelivr.net",
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com"
     ]
   }
 }

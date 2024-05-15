@@ -1,15 +1,29 @@
-import type { Theme } from '@unocss/preset-mini'
-import { defineConfig, presetUno } from 'unocss'
-import { unoShortcuts } from './src/unoShortcuts'
+import { presetMini } from 'unocss'
+import { defineConfig, presetUno, presetAttributify } from 'unocss'
+import { presetTypography } from '@unocss/preset-typography'
+import { presetWebFonts } from 'unocss'
+import presetIcons from '@unocss/preset-icons'
 import { unoTheme } from './src/unoTheme'
 
 export default defineConfig({
-  content: {
-    pipeline: {
-      include: ['./**/*.{js,jsx,ts,tsx}'],
-    },
-  },
-  presets: [presetUno()],
-  shortcuts: [unoShortcuts],
-  theme: unoTheme as Theme,
+  presets: [
+    presetAttributify(),
+    presetUno(),
+    presetTypography(),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        sans: ['Roboto', 'Archivo Narrow', 'Inter'],
+        mono: ['Fira Code', 'Fira Mono:400,700'],
+      },
+    }),
+    presetMini(),
+    presetIcons({
+      extraProperties: {
+        'display': 'inline-block',
+        'vertical-align': 'middle',
+      }
+    }),
+  ],
+  theme: unoTheme
 })

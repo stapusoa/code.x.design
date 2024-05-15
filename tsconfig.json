@@ -9,6 +9,7 @@
     "target": "es6",
     "lib": ["es6", "dom"],
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "typeRoots": [
       "./node_modules/@types",
@@ -17,7 +18,10 @@
   },
   "include": [
     "src/**/*",
-    "code.ts",
-    "uno.config.ts"
+    "uno.config.ts",
+    "dist/styles.css",
+    "src/unoTheme.ts",
+    "src/ui.html", "dist/code.js",
+    "src/custom-types.d.ts",
   ]
 }
