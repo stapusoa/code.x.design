@@ -22,5 +22,6 @@
     "dist/styles.css",
     "src/unoTheme.ts",
     "src/ui.html", "dist/code.js",
+    "src/custom-types.d.ts",
   ]
 }
