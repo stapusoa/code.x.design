@@ -136,6 +136,7 @@
 </style>
 
 
+
 <div class="bg-charcoal w-full" id="myTabs">
   <div class="mx-auto max-w-7xl border-b border-neutral-700">
     <div class="relative flex flex-row gap-4 p-3">
@@ -334,6 +335,7 @@
 
         
 
+
 <script>
 
 function openTab(event, tabName) {
@@ -374,9 +376,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('create').onclick = () => {
+
   const componentType = document.getElementById('component-dropdown').value;
   const create = document.getElementById('create');
   parent.postMessage({ pluginMessage: { type: 'create', componentType: componentType } }, '*')
+
 }
 
 document.getElementById('cancel').onclick = () => {
