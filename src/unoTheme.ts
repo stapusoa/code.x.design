@@ -14,6 +14,9 @@ export const unoTheme = {
     zinc: {
       300: '#d4d4d8',
     },
+    slate: {
+      500: '#64748B',
+    },
   },
   textColor: {
     'green': '#13AE5C',
@@ -29,6 +32,7 @@ export const unoTheme = {
     archivo: '"Archivo Narrow", sans-serif',
     roboto: '"Roboto", sans-serif',
     inter: '"Inter", sans-serif',
+    'material': ['Material Symbols Outlined'],
   },
   fontSize: {
     xs: ['12px', '16px'],
