@@ -5,6 +5,7 @@
   "main": "dist/code.js",
   "scripts": {
     "start": "webpack --watch",
+    "build:parse": "node parse-components.js",
     "build:ts": "tsc -p tsconfig.json",
     "build:css": "unocss 'src/**/*.html' 'src/**/*.js' -o dist/styles.css",
     "build:plugin": "webpack --mode production",

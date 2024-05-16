@@ -10,6 +10,7 @@
     "lib": ["es6", "dom"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "strict": true,
     "typeRoots": [
       "./node_modules/@types",
@@ -22,6 +23,6 @@
     "dist/styles.css",
     "src/unoTheme.ts",
     "src/ui.html", "dist/code.js",
-    "src/custom-types.d.ts",
+    "src/custom-types.d.ts", "dist/unoTheme.js",
   ]
 }

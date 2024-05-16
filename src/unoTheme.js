@@ -17,6 +17,12 @@ export const unoTheme = {
         slate: {
             500: '#64748B',
         },
+        indigo: {
+            500: '#6366f1',
+            600: '#4f46e5',
+        },
+        white: '#FFFFFF',
+        black: '#000000',
     },
     textColor: {
         'green': '#13AE5C',
@@ -27,6 +33,8 @@ export const unoTheme = {
         'neutral-400': '#a3a3a3',
         'neutral-700': '#404040',
         'zinc-300': '#d4d4d8',
+        'black': '#000000',
+        'white': '#FFFFFF',
     },
     fontFamily: {
         archivo: '"Archivo Narrow", sans-serif',

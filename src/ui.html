@@ -1,20 +1,15 @@
-<link rel="stylesheet" type="css" href="./dist/styles.css">
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
-/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" type="text/css" href="./dist/styles.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet" as="style" preload>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" as="style" preload>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css" as="style" preload>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" preload>
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.bottom {
-  border-bottom: 1px solid rgb(163 163 163);
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
 }
 .m-0 {
   margin: 0;
@@ -22,7 +17,12 @@
 .p-0 {
   padding: 0;
 }
-
+.mb-1px {
+  margin-bottom: 1px;
+}
+.bottom {
+  border-bottom: 1px solid rgb(163 163 163);
+}
 .font-\[Material_Symbols_Outlined\]{font-family:Material Symbols Outlined;}
 
 .pointer-events-none{pointer-events:none;}
@@ -121,21 +121,7 @@
 .focus\:ring-2:focus{--un-ring-width:2px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .focus\:ring-indigo-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(79 70 229 / var(--un-ring-opacity));}
 
-
-
-
-*, ::after, ::before {
-    box-sizing: border-box;
-    background-repeat: no-repeat;
-}
-
-.mb-1px {
-  margin-bottom: 1px;
-}
-
 </style>
-
-
 
 <div class="bg-charcoal w-full" id="myTabs">
   <div class="mx-auto max-w-7xl border-b border-neutral-700">
@@ -160,7 +146,7 @@
                 <option value="rectangle">Rectangle</option>
                 <option value="circle">Circle</option>
                 <option value="text">Text</option>
-                <option value="button">Button</option>
+                <option value="button-des">Button</option>
               </select>  
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-50">
                 <span class="font-[Material_Symbols_Outlined] text-stone-400 text-5">expand_more</span>
@@ -168,11 +154,11 @@
             </div>
           </div>
 
-          <button class="bg-green px-6 py-2 rounded-md mb-1px" id="create">
+          <button onclick="sendLabelToPlugin()" class="bg-green px-6 py-2 rounded-md mb-1px" id="create">
             <p class="text-xs font-medium font-inter text-stone-50">Generate</p>
           </button>
+          
         </div>
-        
       </div>
       <div class="mt-5 p-3 flex flex-col gap-4 border rounded-md border-neutral-700">
         <div>
@@ -182,7 +168,7 @@
         <div class="flex flex-row gap-3 items-end">
           <div class="flex flex-col w-full gap-2">
             <p class="text-xs font-normal font-inter text-stone-400">Children</p>
-            <input class="bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-normal font-inter text-stone-200 placeholder:text-stone-400 focus:ring-2 focus:ring-indigo-600" type="text" name="text" placeholder="Label" aria-label="Text" />
+            <input class="bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-normal font-inter text-stone-200 placeholder:text-stone-400 focus:ring-2 focus:ring-indigo-600" id="label" type="text" name="text" placeholder="Label" aria-label="Text" />
           </div>
         </div>
         <div class="flex flex-col w-full gap-2">
@@ -201,129 +187,6 @@
       </div>
     </div>
       
-       
-      <!--
-    <div class="px-4 py-2 tabcontent" id="tab2">
-      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
-        <div>
-          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
-          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
-        </div>
-        <div class="flex flex-row gap-4 items-end">
-          <div class="flex flex-col w-full gap-2">
-            <p class="text-4">Component</p>
-            <select id="component-dropdown" class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
-              <option value="rectangle">Rectangle</option>
-              <option value="circle">Circle</option>
-              <option value="text">Text</option>
-            </select>  
-          </div>
-          <button class="bg-green px-4 py-1 rounded-md" id="create">
-            <p class="text-4 font-medium text-stone-200">Generate</p>
-          </button>
-        </div>
-      </div>
-      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
-        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
-        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
-        <div>
-          <div class="flex-col">
-            <p class="text-4 font-medium text-zinc-300">Component</p>
-            <div>
-              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
-            </div>
-          </div>
-          <div class="flex-col">
-            <p class="text-4 font-medium text-zinc-300">Component</p>
-            <div class="flex flex-col w-full gap-2">
-              <p class="text-4">Component</p>
-              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
-                <option value="rectangle">Rectangle</option>
-                <option value="circle">Circle</option>
-                <option value="text">Text</option>
-              </select>  
-            </div>
-          </div>
-        </div>
-        <button id="cancel">Cancel</button>
-      </div>
-    </div>
-    <div class="px-4 py-2 tabcontent" id="tab3">
-      <div class="flex flex-col gap-4 px-4 py-4 border rounded-md border-neutral-700">
-        <div>
-          <h2 class="text-base font-semibold font-sans text-stone-50">Design Generator</h2>
-          <p class="text-xs font-normal font-inter text-stone-400">Convert your components from code into Figma designs.</p>
-        </div>
-        <div class="flex flex-row gap-4 items-end">
-          <div class="flex flex-col w-full gap-2">
-            <p class="text-4">Component</p>
-            <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
-              <option value="rectangle">Rectangle</option>
-              <option value="circle">Circle</option>
-              <option value="text">Text</option>
-            </select>  
-          </div>
-          <label for="select">Select</label>
-            <select id="select" name="select" required>
-              <option value="rectangle" value selected>Rectangle</option>
-              <option value="circle">Circle</option>
-              <option value="text">Text</option>
-            </select>
-            <div class="dropdown cursor-pointer select-none">
-              <div class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
-                <span class="text-xs font-normal font-inter text-stone-50">Select</span>
-                <span class="material-icons text-stone-50 text-base align-middle">expand_more</span>
-              </div>
-              <div class="menu" style="display: none;">
-                <div class="menu-item" value="rectangle">Rectangle</div>
-                <div class="menu-item" value="circle">Circle</div>
-                <div class="menu-item" value="text">Text</div>
-              </div>
-            </div>
-
-            <div class="dropdown cursor-pointer select-none">
-              <label for="components" class="text-stone-200"></label>
-              <select id="components" class="py-1 px-2 border border-neutral-700 rounded-md bg-transparent flex items-center justify-between">
-                <option>Hello</option>              
-</select>
-              <div class="menu" style="display: none;">
-                <div class="menu-item" value="rectangle">Rectangle</div>
-                <div class="menu-item" value="circle">Circle</div>
-                <div class="menu-item" value="text">Text</div>
-              </div>
-            </div>
-
-
-          <button class="bg-green px-4 py-1 rounded-md" id="create">
-            <p class="text-4 font-medium text-stone-200">Generate</p>
-          </button>
-        </div>
-      </div>
-      <div class="mt-5 px-4 py-4 border rounded-md border-neutral-700">
-        <h2 class="text-base font-semibold font-sans text-stone-50">Properties</h2>
-        <p class="type-pg-description">Select type of component - below is a list of variants, sizes, and other properties of the component. If none are selected, default will be generated. variant</p>
-        <div>
-          <div class="flex-col">
-            <p class="text-4 font-medium text-zinc-300">Component</p>
-            <div>
-              <input type="text" name="text" placeholder="Text" aria-label="Text" /> 
-            </div>
-          </div>
-          <div class="flex-col">
-            <p class="text-4 font-medium text-zinc-300">Component</p>
-            <div class="flex flex-col w-full gap-2">
-              <p class="text-4">Component</p>
-              <select class="mt-2 bg-transparent block rounded-[0.25px] outline outline-2 outline-neutral-700 outline-offset-8 py-0.5 px-1 text-stone-400 focus:ring-2 focus:ring-indigo-600">
-                <option value="rectangle">Rectangle</option>
-                <option value="circle">Circle</option>
-                <option value="text">Text</option>
-              </select>  
-            </div>
-          </div>
-        </div>
-        <button id="cancel">Cancel</button>
-      </div>
-    </div>  -->
     <div class="px-3 pb-4">
       <button class="bg-slate-500 px-6 py-2 rounded-md mb-1px" id="cancel">
         <p class="text-xs font-medium font-inter text-stone-50">Cancel</p>
@@ -331,10 +194,6 @@
     </div>
   </div>
 </div>
-
-
-        
-
 
 <script>
 
@@ -375,12 +234,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.getElementById('create').onclick = () => {
-
+function sendLabelToPlugin() {
+  const label = document.getElementById('label').value;
   const componentType = document.getElementById('component-dropdown').value;
-  const create = document.getElementById('create');
-  parent.postMessage({ pluginMessage: { type: 'create', componentType: componentType } }, '*')
-
+  parent.postMessage({ pluginMessage: { type: 'create', componentType: componentType, label: label } }, '*');
 }
 
 document.getElementById('cancel').onclick = () => {

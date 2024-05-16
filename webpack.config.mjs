@@ -15,7 +15,7 @@ export default (env, argv) => ({
         {
             test: /\.tsx?$/,
             use: [
-                // resolve(__dirname, './custom-loader'),
+              //  resolve(__dirname, './custom-loader'),
                 'ts-loader'
             ],
             exclude: /node_modules/,
@@ -31,7 +31,7 @@ export default (env, argv) => ({
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.json'],
     },
     output: {
         filename: '[name].js',

@@ -1,135 +1,130 @@
 import '../dist/styles.css';
+import buttonConfig from '../dist/parsed-button.json';
+
+interface ParsedStyles {
+  backgroundColor: { r: number; g: number; b: number };
+  textColor: { r: number; g: number; b: number };
+  padding: string;
+  borderRadius: string;
+}
+
+const utilityClassToHex: { [key: string]: string } = {
+  'indigo-500': '6366f1',
+  'indigo-600': '4f46e5',
+  'white': 'FFFFFF',
+  // Add more mappings as needed
+};
+
+const buttonHtml: string = buttonConfig["284"];
 
 const width = 450;
 const height = 600;
 
 figma.showUI(__html__, { themeColors: true, width, height });
 
-figma.ui.onmessage = async (msg: { type: string, componentType?: string, text?: string, backgroundColor?: { r: number, g: number, b: number } }) => {
-  const nodes: SceneNode[] = [];
-
-  try {
-    switch (msg.type) {
-      case 'create':
-        handleCreate(msg, nodes);
-        break;
-      case 'cancel':
-        figma.closePlugin();
-        break;
-    }
-  } catch (error) {
-    console.error("Error processing message:", error);
+figma.ui.onmessage = async (msg: { type: string, componentType?: string, label?: string }) => {
+  console.log("Received message:", msg);
+  switch (msg.type) {
+    case 'create':
+      if (msg.componentType === 'button-des' && msg.label) {
+        await createDynamicButton(msg.label, buttonHtml);
+      } else {
+        console.error("Required parameters for creating button are missing.");
+      }
+      break;
+    case 'cancel':
+      figma.closePlugin();
+      break;
+    default:
+      console.error("Unsupported component type", msg.type);
+      return;
   }
 };
 
-async function handleCreate(msg: { componentType?: string, text?: string, backgroundColor?: { r: number, g: number, b: number } }, nodes: SceneNode[]) {
-  console.log("Received message for creation:", msg); 
+async function createDynamicButton(label: string, tsx: string) {
+  const parsedStyles = parseButtonTSX(tsx);
+  console.log("Parsed styles:", parsedStyles);
 
-  if (!msg.componentType) {
-    console.error("componentType is undefined");
-    return;
-  }
+  await figma.loadFontAsync({ family: "Roboto", style: "Bold" });
 
-  let newNode: SceneNode | null = null;
+  const buttonFrame = figma.createFrame();
+  configureButtonFrame(buttonFrame, parsedStyles);
+  console.log("Button frame created:", buttonFrame);
 
-  switch (msg.componentType) {
-    case 'text':
-      await figma.loadFontAsync({ family: "Roboto", style: "Bold" })
-        .then(() => {
-          newNode = figma.createText();
-          newNode.characters = "Hello, Figma!";
-          newNode.fontSize = 24;
-          figma.currentPage.appendChild(newNode);
-          nodes.push(newNode);
-          figma.currentPage.selection = nodes;
-          figma.viewport.scrollAndZoomIntoView(nodes);
-        })
-        .catch(error => {
-          console.error("Failed to load font:", error);
-          // Handle the error, perhaps notify the user via UI
-        });
-      break;
-    case 'rectangle':
-      newNode = figma.createRectangle();
-      newNode.resize(150, 100);
-      newNode.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.75, b: 0.5 } }];
-      break;
-    case 'circle':
-      newNode = figma.createEllipse();
-      newNode.resize(100, 100);
-      newNode.fills = [{ type: 'SOLID', color: { r: 0.25, g: 0.25, b: 0.75 } }];
-      break;
-    case 'button':
-      if (!msg.text || !msg.backgroundColor) {
-        console.error("Button properties missing: Text =", msg.text, "Background Color =", msg.backgroundColor);
-        return; // Return here ensures no further action if properties are missing
-      }
-      newNode = await createButton(msg.text, msg.backgroundColor);
-      break;
-    default:
-      console.error("Unsupported component type");
-      return; // Handle unexpected componentType
-  }
+  const textNode = createTextNode(label, parsedStyles);
+  console.log("Text node created:", textNode);
 
-  if (newNode) {
-    console.log("Appending new node to the page:", newNode);
-    figma.currentPage.appendChild(newNode);
-    nodes.push(newNode);
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
-  }
+  buttonFrame.appendChild(textNode);
+
+  figma.currentPage.appendChild(buttonFrame);
+  figma.currentPage.selection = [buttonFrame];
+  figma.viewport.scrollAndZoomIntoView([buttonFrame]);
+  return buttonFrame;
 }
 
-async function loadFont(family: string, style: string) {
-  const fontName = { family, style };
-  const fonts = await figma.listAvailableFontsAsync();  // Correctly use the async function with await
-  if (!fonts.some(font => font.fontName.family === family && font.fontName.style === style)) {
-    await figma.loadFontAsync(fontName);
-  }
+function configureButtonFrame(buttonFrame: FrameNode, parsedStyles: ParsedStyles) {
+  buttonFrame.layoutMode = 'HORIZONTAL';
+  buttonFrame.primaryAxisAlignItems = 'CENTER';
+  buttonFrame.counterAxisAlignItems = 'CENTER';
+  buttonFrame.primaryAxisSizingMode = 'AUTO';
+  buttonFrame.counterAxisSizingMode = 'AUTO';
+  buttonFrame.name = "button";
+  buttonFrame.verticalPadding = 8;
+  buttonFrame.horizontalPadding = 40;
+  buttonFrame.cornerRadius = parseInt(parsedStyles.borderRadius.replace('rounded-', '')) || 0;
+  buttonFrame.fills = [{ type: 'SOLID', color: parsedStyles.backgroundColor }];
 }
 
-
-function createText(text: string, fontSize: number): TextNode {
-  let textNode = figma.createText();
-  try {
-    textNode.characters = text;
-    textNode.fontSize = fontSize;
-  } catch (error) {
-    console.error("Failed to create text node:", error);
-  }
+function createTextNode(label: string, parsedStyles: ParsedStyles): TextNode {
+  const textNode = figma.createText();
+  textNode.fontName = { family: "Roboto", style: "Bold" };
+  textNode.characters = label;
+  textNode.fontSize = 16;
+  textNode.fills = [{ type: 'SOLID', color: parsedStyles.textColor }];
+  textNode.textAlignHorizontal = 'CENTER';
+  textNode.textAlignVertical = 'CENTER';
   return textNode;
 }
 
+function parseButtonTSX(tsx: string): ParsedStyles {
+  const styleMatches = tsx.match(/className="([^"]+)"/);
+  const styleClasses = styleMatches ? styleMatches[1].split(' ') : [];
 
-function createShape(type: 'rectangle' | 'ellipse', props: { width: number, height: number, color: { r: number, g: number, b: number } }): RectangleNode | EllipseNode {
-  let shape: RectangleNode | EllipseNode;
-  if (type === 'rectangle') {
-    shape = figma.createRectangle();
-  } else {
-    shape = figma.createEllipse();
+  const backgroundColorClass = styleClasses.find(cls => cls.startsWith('bg-'));
+  const textColorClass = styleClasses.find(cls => cls.startsWith('text-') && !cls.match(/text-(xs|sm|md|lg)/));
+  
+  const styles: ParsedStyles = {
+    backgroundColor: hexToRgb(backgroundColorClass || 'bg-black'),
+    textColor: hexToRgb(textColorClass || 'text-black'),
+    padding: styleClasses.find(cls => cls.includes('p-')) || 'default-padding',
+    borderRadius: styleClasses.find(cls => cls.includes('rounded')) || 'default-border-radius'
+  };
+  console.log("Parsed styles after conversion:", styles);
+  return styles;
+}
+
+function hexToRgb(className: string): { r: number; g: number; b: number } {
+  const cleanClass = className.replace('bg-', '').replace('text-', '');
+  if (!utilityClassToHex[cleanClass]) {
+    console.warn(`Unknown class name ${className}, defaulting to black`);
+    return { r: 0, g: 0, b: 0 };
   }
-  shape.resize(props.width, props.height);
-  shape.fills = [{ type: 'SOLID', color: props.color }];
-  return shape;
+  const hexValue = utilityClassToHex[cleanClass];
+
+  console.log(`Converting class ${className} to hex ${hexValue}`);
+
+  const bigint = parseInt(hexValue, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return { r: r / 255, g: g / 255, b: b / 255 };
 }
 
-async function createButton(text: string, backgroundColor: { r: number, g: number, b: number }): Promise<FrameNode> {
-  let button = figma.createFrame();
-  button.resize(200, 50);
-  button.cornerRadius = 4;
-  button.fills = [{ type: 'SOLID', color: backgroundColor }];
+// Example usage:
+const indigo500 = hexToRgb('bg-indigo-500');
+const indigo600 = hexToRgb('bg-indigo-600');
+const white = hexToRgb('text-white');
 
-  await loadFont("Roboto", "Regular"); // Ensure font is loaded before setting text
-  let textNode = createText(text, 16);
-  textNode.textAlignHorizontal = 'CENTER';
-  textNode.textAlignVertical = 'CENTER';
-  button.appendChild(textNode);
-
-  // Calculate position to center the text within the button
-  textNode.x = (button.width - textNode.width) / 2;
-  textNode.y = (button.height - textNode.height) / 2;
-  textNode.constraints = { horizontal: 'CENTER', vertical: 'CENTER' };
-
-  return button; // Return the fully configured FrameNode
-}
-
+console.log(indigo500); // { r: 0.388, g: 0.4, b: 0.945 }
+console.log(indigo600); // { r: 0.31, g: 0.275, b: 0.898 }
+console.log(white);     // { r: 1, g: 1, b: 1 }
