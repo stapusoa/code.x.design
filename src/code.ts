@@ -5,13 +5,22 @@ interface ParsedStyles {
   backgroundColor: { r: number; g: number; b: number };
   textColor: { r: number; g: number; b: number };
   padding: string;
-  borderRadius: string;
+  borderRadius: number;
 }
 
 const utilityClassToHex: { [key: string]: string } = {
   'indigo-500': '6366f1',
   'indigo-600': '4f46e5',
+  'forest-light': '125E5C',
   'white': 'FFFFFF',
+  // Add more mappings as needed
+};
+
+const utilityClassToRadius: { [key: string]: number } = {
+  'rounded-sm': 2,
+  'rounded-md': 4,
+  'rounded-lg': 8,
+  'rounded-xl': 12,
   // Add more mappings as needed
 };
 
@@ -53,7 +62,7 @@ async function createDynamicButton(label: string, tsx: string) {
 
   const textNode = createTextNode(label, parsedStyles);
   console.log("Text node created:", textNode);
-
+  
   buttonFrame.appendChild(textNode);
 
   figma.currentPage.appendChild(buttonFrame);
@@ -71,7 +80,7 @@ function configureButtonFrame(buttonFrame: FrameNode, parsedStyles: ParsedStyles
   buttonFrame.name = "button";
   buttonFrame.verticalPadding = 8;
   buttonFrame.horizontalPadding = 40;
-  buttonFrame.cornerRadius = parseInt(parsedStyles.borderRadius.replace('rounded-', '')) || 0;
+  buttonFrame.cornerRadius = parsedStyles.borderRadius;
   buttonFrame.fills = [{ type: 'SOLID', color: parsedStyles.backgroundColor }];
 }
 
@@ -92,12 +101,13 @@ function parseButtonTSX(tsx: string): ParsedStyles {
 
   const backgroundColorClass = styleClasses.find(cls => cls.startsWith('bg-'));
   const textColorClass = styleClasses.find(cls => cls.startsWith('text-') && !cls.match(/text-(xs|sm|md|lg)/));
-  
+  const borderRadiusClass = styleClasses.find(cls => cls.startsWith('rounded-'));
+
   const styles: ParsedStyles = {
     backgroundColor: hexToRgb(backgroundColorClass || 'bg-black'),
     textColor: hexToRgb(textColorClass || 'text-black'),
     padding: styleClasses.find(cls => cls.includes('p-')) || 'default-padding',
-    borderRadius: styleClasses.find(cls => cls.includes('rounded')) || 'default-border-radius'
+    borderRadius: utilityClassToRadius[borderRadiusClass || 'rounded-md'] || 4,
   };
   console.log("Parsed styles after conversion:", styles);
   return styles;
