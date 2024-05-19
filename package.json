@@ -7,7 +7,7 @@
     "start": "webpack --watch",
     "build:parse": "node parse-components.js",
     "build:ts": "tsc -p tsconfig.json",
-    "build:css": "unocss 'src/**/*.html' 'src/**/*.js' -o dist/styles.css",
+    "build:css": "unocss 'src/**/*.html' 'src/**/*.js'",
     "build:plugin": "webpack --mode production",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix ."

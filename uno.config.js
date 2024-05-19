@@ -3,7 +3,7 @@ import { defineConfig, presetUno, presetAttributify } from 'unocss';
 import { presetTypography } from '@unocss/preset-typography';
 import { presetWebFonts } from 'unocss';
 import presetIcons from '@unocss/preset-icons';
-import { unoTheme } from './src/unoTheme';
+import { unoTheme, buttonColors, buttonHoverColors, colors } from './src/unoTheme';
 export default defineConfig({
     presets: [
         presetAttributify(),
@@ -24,5 +24,5 @@ export default defineConfig({
             }
         }),
     ],
-    theme: unoTheme
+    theme: { unoTheme, buttonColors, buttonHoverColors, colors }
 });

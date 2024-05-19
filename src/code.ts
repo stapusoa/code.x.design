@@ -1,5 +1,6 @@
 import '../dist/styles.css';
 import buttonConfig from '../dist/parsed-button.json';
+import { utilityClassToHex, utilityClassToRadius, utilityClassToPadding } from './utilityMapping';
 
 interface ParsedStyles {
   backgroundColor: { r: number; g: number; b: number };
@@ -7,80 +8,6 @@ interface ParsedStyles {
   padding: { horizontal: number, vertical: number };
   borderRadius: number;
 }
-
-const utilityClassToHex: { [key: string]: string } = {
-  'indigo-500': '6366f1',
-  'indigo-600': '4f46e5',
-  'forest-light': '125E5C',
-  'white': 'FFFFFF',
-  // Add more mappings as needed
-};
-
-const utilityClassToRadius: { [key: string]: number } = {
-  'rounded-none': 0,
-  'rounded-sm': 2,
-  'rounded-md': 4,
-  'rounded-lg': 8,
-  'rounded-xl': 12,
-  // Add more mappings as needed
-};
-
-const utilityClassToPadding: { [key: string]: number } = {
-  'p-0': 0,
-  'p-1': 4,
-  'p-2': 8,
-  'p-3': 12,
-  'p-4': 16,
-  'p-5': 20,
-  'px-0': 0,
-  'px-1': 4,
-  'px-2': 8,
-  'px-3': 12,
-  'px-4': 16,
-  'px-5': 20,
-  'py-0': 0,
-  'py-1': 4,
-  'py-2': 8,
-  'py-3': 12,
-  'py-4': 16,
-  'py-5': 20,
-  'pb-0': 0,
-  'pb-1': 4,
-  'pb-2': 8,
-  'pb-3': 12,
-  'pb-4': 16,
-  'pb-5': 20,
-  'pr-0': 0,
-  'pr-1': 4,
-  'pr-2': 8,
-  'pr-3': 12,
-  'pr-4': 16,
-  'pr-5': 20,
-  'pl-0': 0,
-  'pl-1': 4,
-  'pl-2': 8,
-  'pl-3': 12,
-  'pl-4': 16,
-  'pl-5': 20,
-  'pt-0': 0,
-  'pt-1': 4,
-  'pt-2': 8,
-  'pt-3': 12,
-  'pt-4': 16,
-  'pt-5': 20,
-  'ps-0': 0,
-  'ps-1': 4,
-  'ps-2': 8,
-  'ps-3': 12,
-  'ps-4': 16,
-  'ps-5': 20,
-  'pe-0': 0,
-  'pe-1': 4,
-  'pe-2': 8,
-  'pe-3': 12,
-  'pe-4': 16,
-  'pe-5': 20,
-};
 
 const buttonHtml: string = buttonConfig["284"];
 

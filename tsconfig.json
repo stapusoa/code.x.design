@@ -8,6 +8,8 @@
     },
     "target": "es6",
     "lib": ["es6", "dom"],
+    "outDir": "./dist", 
+    "rootDir": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
@@ -23,6 +25,6 @@
     "dist/styles.css",
     "src/unoTheme.ts",
     "src/ui.html", "dist/code.js",
-    "src/custom-types.d.ts", "dist/unoTheme.js",
+    "src/custom-types.d.ts", "dist/unoTheme.js", "dist/utilityMapping.js",
   ]
 }
