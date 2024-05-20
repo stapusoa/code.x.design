@@ -154,7 +154,7 @@
             </div>
           </div>
 
-          <button onclick="sendLabelToPlugin()" class="bg-green px-6 py-2 rounded-md mb-1px" id="create">
+          <button onclick="sendPropertiesToPlugin()" class="bg-green px-6 py-2 rounded-md mb-1px" id="create">
             <p class="text-xs font-medium font-inter text-stone-50">Generate</p>
           </button>
           
@@ -174,16 +174,33 @@
         <div class="flex flex-col w-full gap-2">
           <p class="text-xs font-normal font-inter text-stone-400">Variant</p>
           <div class="relative inline-block w-full">
-            <select class="appearance-none w-full bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-medium font-inter text-stone-200 focus:ring-2 focus:ring-indigo-600">
-             <!-- <option value="rectangle">Rectangle</option>
-              <option value="circle">Circle</option>
-              <option value="text">Text</option>  -->
-            </select>  
+            <select id="variant-dropdown" class="appearance-none w-full bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-medium font-inter text-stone-200 focus:ring-2 focus:ring-indigo-600">
+              <option value="filled">Filled</option>
+              <option value="filledDark">Filled Dark</option>
+              <option value="outlined">Outlined</option>
+              <option value="text">Text</option>
+              <option value="white">White</option>
+              <option value="error">Error</option>
+            </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-50">
               <span class="font-[Material_Symbols_Outlined] text-stone-400 text-5">expand_more</span>
             </div>
           </div>
         </div>
+        <div class="flex flex-col w-full gap-2">
+          <p class="text-xs font-normal font-inter text-stone-400">Size</p>
+          <div class="relative inline-block w-full">
+            <select id="size-dropdown" class="appearance-none w-full bg-transparent block border rounded-md border-neutral-700 py-2 pl-2 pr-5 text-xs font-medium font-inter text-stone-200 focus:ring-2 focus:ring-indigo-600">
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-50">
+              <span class="font-[Material_Symbols_Outlined] text-stone-400 text-5">expand_more</span>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
       
@@ -210,6 +227,15 @@ function openTab(event, tabName) {
     document.getElementById(tabName).style.display = "block";
     event.currentTarget.className += " active";
   
+}
+
+function sendPropertiesToPlugin() {
+  const componentType = document.getElementById('component-dropdown').value;
+  const label = document.getElementById('label').value;
+  const variant = document.getElementById('variant-dropdown').value;
+  const size = document.getElementById('size-dropdown').value;
+
+  parent.postMessage({ pluginMessage: { type: 'create', componentType, label, variant, size } }, '*');
 }
 
 document.addEventListener('DOMContentLoaded', function() {

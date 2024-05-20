@@ -1,5 +1,5 @@
 import '../dist/styles.css';
-import buttonConfig from '../dist/parsed-button.json';
+import buttonConfig from '../dist/parsed-Button.json';
 import { utilityClassToHex, utilityClassToRadius, utilityClassToPadding } from './utilityMapping';
 
 interface ParsedStyles {
@@ -9,19 +9,20 @@ interface ParsedStyles {
   borderRadius: number;
 }
 
-const buttonHtml: string = buttonConfig["284"];
+// Generate the HTML string from the `jsx` array
+const buttonHtml: string = buttonConfig.jsx.map(tag => `<${tag}></${tag}>`).join('');
 
 const width = 450;
 const height = 600;
 
 figma.showUI(__html__, { themeColors: true, width, height });
 
-figma.ui.onmessage = async (msg: { type: string, componentType?: string, label?: string }) => {
+figma.ui.onmessage = async (msg: { type: string, componentType?: string, label?: string, variant?: string, size?: string }) => {
   console.log("Received message:", msg);
   switch (msg.type) {
     case 'create':
       if (msg.componentType === 'button-des' && msg.label) {
-        await createDynamicButton(msg.label, buttonHtml);
+        await createDynamicButton(msg.label, buttonHtml, msg.variant, msg.size);
       } else {
         console.error("Required parameters for creating button are missing.");
       }
@@ -35,8 +36,8 @@ figma.ui.onmessage = async (msg: { type: string, componentType?: string, label?:
   }
 };
 
-async function createDynamicButton(label: string, tsx: string) {
-  const parsedStyles = parseButtonTSX(tsx);
+async function createDynamicButton(label: string, tsx: string, variant?: string, size?: string) {
+  const parsedStyles = parseButtonTSX(tsx, variant, size);
   console.log("Parsed styles:", parsedStyles);
 
   await figma.loadFontAsync({ family: "Roboto", style: "Bold" });
@@ -82,9 +83,16 @@ function createTextNode(label: string, parsedStyles: ParsedStyles): TextNode {
   return textNode;
 }
 
-function parseButtonTSX(tsx: string): ParsedStyles {
+function parseButtonTSX(tsx: string, variant?: string, size?: string, type?: string): ParsedStyles {
   const styleMatches = tsx.match(/className="([^"]+)"/);
   const styleClasses = styleMatches ? styleMatches[1].split(' ') : [];
+
+  if (variant) {
+    styleClasses.push(`variant-${variant}`);
+  }
+  if (size) {
+    styleClasses.push(`size-${size}`);
+  }
 
   const backgroundColorClass = styleClasses.find(cls => cls.startsWith('bg-'));
   const textColorClass = styleClasses.find(cls => cls.startsWith('text-') && !cls.match(/text-(xs|sm|md|lg)/));
